@@ -2,11 +2,11 @@ class Strings {
 
   Strings._();
 
-  static const String portfolioName = "John Decor";
+  static const String portfolioName = "Manoel Ribeiro";
   static const String work = "Work";
   static const String about = "About";
   static const String products = "Products";
-  static const String contact = "Contatc";
+  static const String contact = "Contact";
 
   static const String title = '''Shooting eye-catching
    moments for fun''';
@@ -19,6 +19,7 @@ class Strings {
   static const String projectsTitle = "Selected Projects";
   static const String projectsSubTitle = "Hover over the cards to learn more about projects";
   static const String darkModeText = "Enable dark mode";
+  static const String lightModeText = "Enable light mode";
 
 
 

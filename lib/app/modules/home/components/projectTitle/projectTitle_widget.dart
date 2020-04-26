@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutterando_desafios_portfolio/app/app_controller.dart';
 import 'package:flutterando_desafios_portfolio/app/shared/strings.dart';
 
 class ProjectTitleWidget extends StatelessWidget {
@@ -6,6 +8,8 @@ class ProjectTitleWidget extends StatelessWidget {
   bool _opacityAnimation;
 
   ProjectTitleWidget(this._opacityAnimation);
+
+  AppController controller = Modular.get<AppController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +24,7 @@ class ProjectTitleWidget extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 200),
                               child: Text(
                                 Strings.projectsTitle,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 36,
-                                  fontWeight: FontWeight.w700
-                                  ),
+                                style: Theme.of(context).textTheme.display1
                                 ),
                             ),
                           ),
@@ -38,10 +38,7 @@ class ProjectTitleWidget extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 200),
                               child: Text(
                                 Strings.projectsSubTitle,
-                                style: TextStyle(
-                                  color: Colors.black.withOpacity(0.5),
-                                  fontSize: 21,
-                                  ),
+                                style: Theme.of(context).textTheme.display2
                                 ),
                             ),
                           ),
@@ -54,19 +51,20 @@ class ProjectTitleWidget extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 200),
                               child: ListTile(
-                                leading: CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: Colors.black,
-                                  child: Icon(
-                                    Icons.brightness_3,
-                                    color: Colors.pink,
-                                    )
-                                    ),
+                                leading: GestureDetector(
+                                  onTap: controller.changeDarkModeState,
+                                  child: CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Theme.of(context).iconTheme.color,
+                                    child: Icon(
+                                      controller.isDarkModeEnabled ? Icons.wb_sunny : Icons.brightness_3,
+                                      color: Colors.pink,
+                                      )
+                                      ),
+                                ),
                                     title: Text(
-                                      Strings.darkModeText,
-                                       style: TextStyle(
-                                         color: Colors.pink
-                                         )
+                                      controller.isDarkModeEnabled ? Strings.lightModeText : Strings.darkModeText,
+                                       style: Theme.of(context).textTheme.display3
                                          ),
                                     )
                             ),

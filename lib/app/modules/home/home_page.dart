@@ -5,7 +5,7 @@ import 'package:flutterando_desafios_portfolio/app/modules/home/components/proje
 import 'package:flutterando_desafios_portfolio/app/modules/home/components/projectsCard/projectsCard_widget.dart';
 import 'package:flutterando_desafios_portfolio/app/shared/images.dart';
 import 'package:flutterando_desafios_portfolio/app/shared/strings.dart';
-import 'home_controller.dart';
+import '../../app_controller.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends ModularState<HomePage, HomeController> with SingleTickerProviderStateMixin {
+class _HomePageState extends ModularState<HomePage, AppController> with SingleTickerProviderStateMixin {
 
   ScrollController _scrollController;
   AnimationController _animationController;
@@ -39,6 +39,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
     }else if (_scrollController.offset < (_scrollController.position.maxScrollExtent/2)){
       setState(() {
         _showProjects = false;
+        controller.isDarkModeEnabled = false;
       });
     }
   }
@@ -54,21 +55,34 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        titleSpacing: 200,
-        title: Text(
-          Strings.portfolioName,
-          style: Theme.of(context).textTheme.subhead.copyWith(fontWeight: FontWeight.w700),
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: BorderSide(
+                      color: Theme.of(context).dividerColor
+                      )
+                      )
+                      ),
+          child: AppBar(
+            brightness: Theme.of(context).brightness,
+            titleSpacing: 200,
+            title: Text(
+              Strings.portfolioName,
+              style: Theme.of(context).textTheme.subhead.copyWith(fontWeight: FontWeight.w700),
+              ),
+            elevation: 0,
+            backgroundColor: Theme.of(context).appBarTheme.color,
+            actions: <Widget>[
+              HeaderItemWidget(title: Strings.work),
+              HeaderItemWidget(title: Strings.about),
+              HeaderItemWidget(title: Strings.products),
+              HeaderItemWidget(title: Strings.contact),
+              SizedBox(width: 200)
+            ],
           ),
-        elevation: 1,
-        backgroundColor: Color.fromRGBO(255, 255, 255, 0.99),
-        actions: <Widget>[
-          HeaderItemWidget(title: Strings.work),
-          HeaderItemWidget(title: Strings.about),
-          HeaderItemWidget(title: Strings.products),
-          HeaderItemWidget(title: Strings.contact),
-          SizedBox(width: 200)
-        ],
+        ),
       ),
       body: Stack(
         children: <Widget>[
