@@ -19,7 +19,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
 
   ScrollController _scrollController;
   AnimationController _animationController;
-  bool _opacityAnimation = false;
+  bool _showProjects = false;
 
    @override
   void initState() {
@@ -34,11 +34,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
   _scrollListener(){
     if (_scrollController.offset >= (_scrollController.position.maxScrollExtent/2)){
         setState(() {
-          _opacityAnimation = true;
+          _showProjects = true;
       });
     }else if (_scrollController.offset < (_scrollController.position.maxScrollExtent/2)){
       setState(() {
-        _opacityAnimation = false;
+        _showProjects = false;
       });
     }
   }
@@ -46,7 +46,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
   scrollToMax(){
     _scrollController.animateTo(_scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 1000), curve: Curves.easeIn);
     setState(() {
-      _opacityAnimation = true;
+      _showProjects = true;
     });
   }
 
@@ -72,18 +72,6 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
       ),
       body: Stack(
         children: <Widget>[
-          Positioned(
-            left: 10,
-            bottom: 10,
-            child: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                color: Colors.black,
-                shape: BoxShape.circle
-                ),
-            ),
-          ),
           Center(
             child: SingleChildScrollView(
               controller: _scrollController,
@@ -115,7 +103,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
                       style: Theme.of(context).textTheme.button,
                       ),
                       ),
-                      ProjectTitleWidget(_opacityAnimation),
+                      ProjectTitleWidget(_showProjects),
                       Flexible(
                         flex: 1,
                         fit: FlexFit.loose,
@@ -124,19 +112,34 @@ class _HomePageState extends ModularState<HomePage, HomeController> with SingleT
                          child: Row(
                             children: <Widget>[
                               ProjectsCardWidget(
-                                imageLocation: Images.projectImage
+                                padding: 100,
+                                showProjects: _showProjects,
+                                duration: 1000,
+                                imageLocation: Images.projectImage1
                                 ),
                               ProjectsCardWidget(
-                                imageLocation: Images.projectImage
+                                padding: 200,
+                                showProjects: _showProjects,
+                                duration: 1100,
+                                imageLocation: Images.projectImage2
                                 ),
                               ProjectsCardWidget(
-                                imageLocation: Images.projectImage
+                                padding: 300,
+                                showProjects: _showProjects,
+                                duration: 1200,
+                                imageLocation: Images.projectImage3
                                 ),
                               ProjectsCardWidget(
-                                imageLocation: Images.projectImage
+                                padding: 400,
+                                showProjects: _showProjects,
+                                duration: 1300,
+                                imageLocation: Images.projectImage4
                                 ),
                               ProjectsCardWidget(
-                                imageLocation: Images.projectImage
+                                padding: 500,
+                                showProjects: _showProjects,
+                                duration: 1400,
+                                imageLocation: Images.projectImage5
                                 ),
                             ],
                             ),
