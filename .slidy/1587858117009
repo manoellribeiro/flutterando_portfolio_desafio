@@ -1,0 +1,2 @@
+lib/app/modules/home/components/projectsCard/projectsCard_widget.dart
+test/app/modules/home/components/projectsCard/projectsCard_widget_test.dart

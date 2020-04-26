@@ -1,0 +1,2 @@
+lib/app/modules/home/components/projectTitle/projectTitle_widget.dart
+test/app/modules/home/components/projectTitle/projectTitle_widget_test.dart
